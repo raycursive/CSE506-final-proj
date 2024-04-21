@@ -51,6 +51,7 @@ fn main() {
         "Benchmark: test run {} threads, size: {}, pin_to_core?: {}, memory allocator: {}",
         args.num_threads, args.size, args.pin, MALLOC_NOTE
     );
+
     multithread_run(
         args.num_threads,
         args.size,

@@ -6,3 +6,4 @@ mod fix_sized_key;
 pub mod skiplist;
 pub mod binary_search_tree;
 pub mod quick_istr;
+mod art;

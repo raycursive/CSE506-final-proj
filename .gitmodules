@@ -1,3 +1,0 @@
-[submodule "ycsb-rs"]
-	path = ycsb-rs
-	url = https://github.com/penberg/ycsb-rs
