@@ -1,5 +1,5 @@
 [workspace]
-members = ["benchmarks", "benchrunner", "data_structrues"]
+members = ["benchmarks", "benchrunner", "data_structures"]
 resolver = "2"
 
 [workspace.package]

@@ -1,0 +1,10 @@
+[package]
+name = "data_structures"
+version.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+crossbeam = { version = "0.8.4", features = ["crossbeam-epoch", "crossbeam-queue", "crossbeam-deque", "crossbeam-channel", "nightly"] }
+crossbeam-skiplist = "0.1.3"

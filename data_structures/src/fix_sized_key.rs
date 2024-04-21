@@ -199,6 +199,20 @@ where
     }
 }
 
+unsafe impl<T: FixSizedKeyParams> Send for FixSizedKey<T>
+where
+    [(); T::KEY_SIZE]: Sized,
+    [(); T::KEY_SIZE / 8]: Sized,
+{
+}
+
+unsafe impl<T: FixSizedKeyParams> Sync for FixSizedKey<T>
+where
+    [(); T::KEY_SIZE]: Sized,
+    [(); T::KEY_SIZE / 8]: Sized,
+{
+}
+
 impl<T: FixSizedKeyParams> FixSizedKey<T>
 where
     [(); T::KEY_SIZE]: Sized,

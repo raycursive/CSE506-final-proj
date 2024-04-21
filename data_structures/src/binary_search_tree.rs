@@ -11,7 +11,7 @@ use std::{
 use crate::{
     fix_sized_key::{FixSizedKey, FixSizedKeyParams},
     quick_istr::QuickIStr,
-    traits::{KeyType, Tree, ValueType},
+    interfaces::{KeyType, Tree, ValueType},
 };
 
 pub trait TreeParams: FixSizedKeyParams {
@@ -117,6 +117,9 @@ pub struct LockFreeBinarySearchTree<T: TreeParams> {
     pub root: AtomicPtr<Node<T>>,
 }
 
+unsafe impl<T: TreeParams> Send for LockFreeBinarySearchTree<T> {}
+unsafe impl<T: TreeParams> Sync for LockFreeBinarySearchTree<T> {}
+
 impl<T: TreeParams<ValueType = V>, K, V> Tree<K, V> for LockFreeBinarySearchTree<T>
 where
     K: Into<T::IKeyType> + KeyType,
@@ -129,7 +132,7 @@ where
         }
     }
 
-    fn put(&mut self, key: K, value: V) {
+    fn put(&self, key: K, value: V) {
         let new_p_value = Box::into_raw(Box::new(value.into()));
         let mut new_p_node: *mut Node<T> = null_mut();
         let key = key.into();
@@ -223,7 +226,7 @@ where
         return None;
     }
 
-    fn remove(&mut self, _key: K) {
+    fn remove(&self, _key: K) {
         todo!();
     }
 }
