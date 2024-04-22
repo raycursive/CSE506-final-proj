@@ -11,11 +11,23 @@ mod testclient;
 mod testcases;
 mod testrunner;
 
-#[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
+#[cfg(feature = "jemalloc")]
 use tikv_jemallocator::Jemalloc;
-#[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
+#[cfg(feature = "jemalloc")]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
+
+#[cfg(feature = "tcmalloc")]
+use tcmalloc::TCMalloc;
+#[cfg(feature = "tcmalloc")]
+#[global_allocator]
+static GLOBAL: TCMalloc = TCMalloc;
+
+#[cfg(feature = "hoard")]
+use hoard_allocator::Hoard;
+#[cfg(feature = "hoard")]
+#[global_allocator]
+static GLOBAL: Hoard = Hoard;
 
 static MALLOC_NOTE: &str = if cfg!(feature="jemalloc") {
     "jemalloc"

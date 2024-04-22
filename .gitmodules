@@ -1,9 +1,9 @@
 [submodule "ycsb-rs"]
 	path = ycsb-rs
 	url = https://github.com/penberg/ycsb-rs
-[submodule "hoard-binding/Hoard"]
-	path = hoard-binding/Hoard
+[submodule "hoard-allocator/Hoard"]
+	path = hoard-allocator/Hoard
 	url = https://github.com/emeryberger/Hoard
-[submodule "hoard-binding/Heap-Layers"]
-	path = hoard-binding/Heap-Layers
+[submodule "hoard-allocator/Heap-Layers"]
+	path = hoard-allocator/Heap-Layers
 	url = https://github.com/emeryberger/Heap-Layers
