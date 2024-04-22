@@ -1,18 +1,21 @@
 #![feature(trait_alias, generic_const_exprs)]
 
 use clap::Parser;
-use data_structures::binary_search_tree;
+#[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
+use tikv_jemallocator::Jemalloc;
+
+use data_structures::{art, binary_search_tree};
+
 use crate::{
     testcases::Testcases,
     testrunner::multithread_run,
 };
+use crate::testcases::{Testcasesi32, TestcasesUsize};
 
 mod testclient;
 mod testcases;
 mod testrunner;
 
-#[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
-use tikv_jemallocator::Jemalloc;
 #[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
@@ -52,13 +55,17 @@ fn main() {
         args.num_threads, args.size, args.pin, MALLOC_NOTE
     );
 
+    type LFBST = binary_search_tree::LockFreeBST;
+    type ART = art::BasicArt;
+    println!("Using ART tree");
+
     multithread_run(
         args.num_threads,
         args.size,
         args.pin,
         args.run_name,
         args.run_profiler,
-        Testcases::<binary_search_tree::LockFreeBST>::find("simple"),
+        TestcasesUsize::<ART>::find("simple"),
     );
 }
 

@@ -1,5 +1,6 @@
 [workspace]
-members = ["benchmarks", "benchrunner", "data_structures"]
+default-members = ["benchmarks", "benchrunner", "data_structures"]
+members = ["benchmarks", "benchrunner", "data_structures", "ycsb-rs"]
 resolver = "2"
 
 [workspace.package]
@@ -11,7 +12,6 @@ rusty-hook = "^0.11.2"
 rand = "0.8.5"
 log = { version = "0.4.20", features = ["release_max_level_info"] }
 env_logger = "0.10.1"
-congee = "0.2.18"
 
 [profile.release]
 opt-level = 3

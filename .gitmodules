@@ -1,0 +1,3 @@
+[submodule "ycsb"]
+	path = ycsb-rs
+	url = git@github.com:Sethu98/ycsb-rs.git
