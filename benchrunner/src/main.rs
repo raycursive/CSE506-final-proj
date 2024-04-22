@@ -46,6 +46,9 @@ struct Args {
 
     #[arg(long = "profile", default_value_t = false)]
     run_profiler: bool,
+
+    // #[arg(short='d', long="data-structure", default_value = "BPTree")]
+    // data_structure: str
 }
 
 fn main() {
@@ -57,9 +60,7 @@ fn main() {
 
     type LFBST = binary_search_tree::LockFreeBST;
     type ART = art::DefaultArt;
-    type BPTree = bptree::DefaultBpTree;
-
-    type TreeToUse = BPTree;
+    type BPTree = bptree::BpTree<String, String>;
 
     multithread_run(
         args.num_threads,
@@ -67,7 +68,7 @@ fn main() {
         args.pin,
         args.run_name,
         args.run_profiler,
-        TestcasesUsize::<TreeToUse>::find("simple"),
+        Testcases::<BPTree>::find("simple"),
     );
 }
 
