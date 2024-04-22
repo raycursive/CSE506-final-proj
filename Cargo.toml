@@ -1,5 +1,5 @@
 [workspace]
-members = ["benchmarks", "benchrunner", "data_structures"]
+members = ["benchmarks", "benchrunner", "data_structures", "hoard-binding"]
 resolver = "2"
 
 [workspace.package]
@@ -7,7 +7,7 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace.dependencies]
-rusty-hook = "^0.11.2"
+# rusty-hook = "^0.11.2"
 rand = "0.8.5"
 log = { version = "0.4.20", features = ["release_max_level_info"] }
 env_logger = "0.10.1"
