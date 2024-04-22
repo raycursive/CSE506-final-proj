@@ -1,10 +1,11 @@
 #![feature(trait_alias, generic_const_exprs)]
 
+use clap::builder::Str;
 use clap::Parser;
 #[cfg(all(not(target_env = "msvc"), feature = "jemalloc"))]
 use tikv_jemallocator::Jemalloc;
 
-use data_structures::{art, binary_search_tree, bptree};
+use data_structures::{art, avl, binary_search_tree, bptree};
 
 use crate::{
     testcases::Testcases,
@@ -61,6 +62,7 @@ fn main() {
     type LFBST = binary_search_tree::LockFreeBST;
     type ART = art::DefaultArt;
     type BPTree = bptree::BpTree<String, String>;
+    type AVL = avl::ConcurrentAVLTree<usize, usize>;
 
     multithread_run(
         args.num_threads,
@@ -68,7 +70,7 @@ fn main() {
         args.pin,
         args.run_name,
         args.run_profiler,
-        Testcases::<BPTree>::find("simple"),
+        TestcasesUsize::<AVL>::find("simple"),
     );
 }
 

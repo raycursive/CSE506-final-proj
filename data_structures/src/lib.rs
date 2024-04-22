@@ -8,3 +8,4 @@ pub mod binary_search_tree;
 pub mod quick_istr;
 pub mod art;
 pub mod bptree;
+pub mod avl;
