@@ -10,8 +10,8 @@ use std::{
 
 use crate::{
     fix_sized_key::{FixSizedKey, FixSizedKeyParams},
-    quick_istr::QuickIStr,
     interfaces::{KeyType, Tree, ValueType},
+    quick_istr::QuickIStr,
 };
 
 pub trait TreeParams: FixSizedKeyParams {

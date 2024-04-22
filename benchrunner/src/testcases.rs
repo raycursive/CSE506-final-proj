@@ -30,7 +30,10 @@ impl<T: TestTree<String>> Testcases<T> {
 
         let mut t = Instant::now();
         for &key in keys.iter() {
-            client.put(QuickIStr::new(key as u64).into(), QuickIStr::new(key as u64 + 1).into());
+            client.put(
+                QuickIStr::new(key as u64).into(),
+                QuickIStr::new(key as u64 + 1).into(),
+            );
         }
         let put_time_cost = t.elapsed();
         client.report("put", n, put_time_cost);
@@ -38,7 +41,10 @@ impl<T: TestTree<String>> Testcases<T> {
 
         t = Instant::now();
         for &key in keys.iter() {
-            client.get_check(QuickIStr::new(key as u64).into(), QuickIStr::new(key as u64 + 1).into());
+            client.get_check(
+                QuickIStr::new(key as u64).into(),
+                QuickIStr::new(key as u64 + 1).into(),
+            );
         }
         let get_time_cost = t.elapsed();
         client.report("get", n, get_time_cost);
@@ -54,9 +60,15 @@ impl<T: TestTree<String>> Testcases<T> {
         t = Instant::now();
         for i in 0..n {
             if random[i] {
-                client.put(QuickIStr::new(new_keys[i] as u64).into(), QuickIStr::new(new_keys[i] as u64+ 1).into());
+                client.put(
+                    QuickIStr::new(new_keys[i] as u64).into(),
+                    QuickIStr::new(new_keys[i] as u64 + 1).into(),
+                );
             } else {
-                client.get_check(QuickIStr::new(keys[i] as u64).into(), QuickIStr::new(keys[i] as u64+ 1).into());
+                client.get_check(
+                    QuickIStr::new(keys[i] as u64).into(),
+                    QuickIStr::new(keys[i] as u64 + 1).into(),
+                );
             }
         }
         let r50_time_cost = t.elapsed();

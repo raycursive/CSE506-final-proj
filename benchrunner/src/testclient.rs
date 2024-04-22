@@ -1,6 +1,11 @@
 use itertools::Itertools;
 use once_cell::sync::Lazy;
-use std::{collections::HashMap, marker::PhantomData, sync::{Arc, Mutex}, time::Duration};
+use std::{
+    collections::HashMap,
+    marker::PhantomData,
+    sync::{Arc, Mutex},
+    time::Duration,
+};
 
 use data_structures::interfaces::{KeyType, Tree};
 

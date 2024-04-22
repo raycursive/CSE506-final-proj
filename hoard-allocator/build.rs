@@ -1,4 +1,3 @@
-
 // fn main() {
 //     cc::Build::new()
 //         .cpp(true)
@@ -21,10 +20,8 @@
 //         .compile("libhoard.a");
 // }
 
-
-
-use std::process::Command;
 use std::path::PathBuf;
+use std::process::Command;
 
 const CPPFLAGS: &'static str = "-std=c++14 -flto -O3 -DNDEBUG -ffast-math -fno-builtin-malloc -Wall -Wextra -Wshadow -Wconversion -Wuninitialized -Dalways_inline=";
 
@@ -39,33 +36,55 @@ fn main() {
     let heaplayers_build = build_dir.join("Hoard/src/Heap-Layers");
 
     // Project root and submodules
-    let root_dir = project_root::get_project_root().expect("Failed to get project root.").join("hoard-allocator");
+    let root_dir = project_root::get_project_root()
+        .expect("Failed to get project root.")
+        .join("hoard-allocator");
     let hoard_module = root_dir.join("Hoard");
     let heaplayers_module = root_dir.join("Heap-Layers");
 
     // Copy Hoard submodule to hoard_build
     if !hoard_build.exists() {
         let mut cmd = Command::new("cp");
-        cmd.current_dir(&build_dir).args(&["-r", &hoard_module.to_str().unwrap(), &hoard_build.to_str().unwrap()]);
+        cmd.current_dir(&build_dir).args(&[
+            "-r",
+            &hoard_module.to_str().unwrap(),
+            &hoard_build.to_str().unwrap(),
+        ]);
         run_command(&mut cmd);
-        assert!(hoard_build.exists(), "Hoard is not symlinked properly: {:?}", hoard_build);
+        assert!(
+            hoard_build.exists(),
+            "Hoard is not symlinked properly: {:?}",
+            hoard_build
+        );
     }
 
     // Copy Heap-Layers submodule to heaplayers_build
     if !heaplayers_build.exists() {
         let mut cmd = Command::new("cp");
-        cmd.current_dir(&hoard_src).args(&["-r", &heaplayers_module.to_str().unwrap(), &heaplayers_build.to_str().unwrap()]);
+        cmd.current_dir(&hoard_src).args(&[
+            "-r",
+            &heaplayers_module.to_str().unwrap(),
+            &heaplayers_build.to_str().unwrap(),
+        ]);
         run_command(&mut cmd);
-        assert!(heaplayers_build.exists(), "Heap-Layers is not symlinked properly: {:?}", heaplayers_build);
+        assert!(
+            heaplayers_build.exists(),
+            "Heap-Layers is not symlinked properly: {:?}",
+            heaplayers_build
+        );
     }
 
     // Run make in hoard_src
     let mut cmd = Command::new("make");
-    cmd.current_dir(&hoard_src).args(&[&get_hoard_build_string(), &format!("CPPFLAGS={}", CPPFLAGS)]);
+    cmd.current_dir(&hoard_src)
+        .args(&[&get_hoard_build_string(), &format!("CPPFLAGS={}", CPPFLAGS)]);
     run_command(&mut cmd);
 
     println!("cargo:rustc-link-lib=static=hoard");
-    println!("cargo:rustc-link-search=native={}", &hoard_src.to_str().unwrap());
+    println!(
+        "cargo:rustc-link-search=native={}",
+        &hoard_src.to_str().unwrap()
+    );
 }
 
 fn run_command(cmd: &mut Command) {

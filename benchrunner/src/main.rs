@@ -1,14 +1,11 @@
 #![feature(trait_alias, generic_const_exprs)]
 
+use crate::{testcases::Testcases, testrunner::multithread_run};
 use clap::Parser;
 use data_structures::binary_search_tree;
-use crate::{
-    testcases::Testcases,
-    testrunner::multithread_run,
-};
 
-mod testclient;
 mod testcases;
+mod testclient;
 mod testrunner;
 
 #[cfg(feature = "jemalloc")]
@@ -29,11 +26,11 @@ use hoard_allocator::Hoard;
 #[global_allocator]
 static GLOBAL: Hoard = Hoard;
 
-static MALLOC_NOTE: &str = if cfg!(feature="jemalloc") {
+static MALLOC_NOTE: &str = if cfg!(feature = "jemalloc") {
     "jemalloc"
-} else if cfg!(feature="tcmalloc") {
+} else if cfg!(feature = "tcmalloc") {
     "tcmalloc"
-} else if cfg!(feature="hoard") {
+} else if cfg!(feature = "hoard") {
     "hoard"
 } else {
     "default (glibc) malloc"
@@ -72,4 +69,3 @@ fn main() {
         Testcases::<binary_search_tree::LockFreeBST>::find("simple"),
     );
 }
-
