@@ -1,6 +1,5 @@
 use congee::Art;
 
-use crate::binary_search_tree::TreeParams;
 use crate::interfaces::{GetType, KeyType, Tree, ValueType};
 
 

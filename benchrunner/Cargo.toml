@@ -12,7 +12,7 @@ once_cell = "1.19.0"
 pprof = { version = "0.13.0", features = ["flamegraph", "_protobuf", "protobuf-codec", "prost-codec"]}
 cpuprofiler = "0.0.4"
 itertools = "0.12.1"
-tcmalloc = { version = "0.3.0", features = ["bundled"] }
+#tcmalloc = { version = "0.3.0", features = ["bundled"] }
 tikv-jemallocator = "0.5"
 hoard-allocator = {path = "../hoard-allocator" }
 

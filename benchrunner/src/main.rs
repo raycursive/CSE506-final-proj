@@ -79,7 +79,7 @@ fn main() {
         args.pin,
         args.run_name,
         args.run_profiler,
-        TestcasesUsize::<AVL>::find("simple"),
+        Testcases::<BPTree>::find("simple"),
     );
 }
 
