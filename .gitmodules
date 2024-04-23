@@ -1,6 +1,6 @@
 [submodule "ycsb-rs"]
 	path = ycsb-rs
-	url = https://github.com/penberg/ycsb-rs
+	url = https://github.com/Sethu98/ycsb-rs.git
 [submodule "hoard-allocator/Hoard"]
 	path = hoard-allocator/Hoard
 	url = https://github.com/emeryberger/Hoard

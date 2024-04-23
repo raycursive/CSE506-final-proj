@@ -1,8 +1,11 @@
 #![feature(trait_alias, generic_const_exprs)]
 
-use crate::{testcases::Testcases, testrunner::multithread_run};
 use clap::Parser;
-use data_structures::binary_search_tree;
+use data_structures::{art, avl, binary_search_tree, bptree};
+use crate::{
+    testcases::Testcases,
+    testrunner::multithread_run,
+};
 
 mod testcases;
 mod testclient;
@@ -10,18 +13,22 @@ mod testrunner;
 
 #[cfg(feature = "jemalloc")]
 use tikv_jemallocator::Jemalloc;
+
 #[cfg(feature = "jemalloc")]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
 
 #[cfg(feature = "tcmalloc")]
 use tcmalloc::TCMalloc;
+
 #[cfg(feature = "tcmalloc")]
 #[global_allocator]
 static GLOBAL: TCMalloc = TCMalloc;
 
 #[cfg(feature = "hoard")]
 use hoard_allocator::Hoard;
+use crate::testcases::TestcasesUsize;
+
 #[cfg(feature = "hoard")]
 #[global_allocator]
 static GLOBAL: Hoard = Hoard;
@@ -60,12 +67,19 @@ fn main() {
         "Benchmark: test run {} threads, size: {}, pin_to_core?: {}, memory allocator: {}",
         args.num_threads, args.size, args.pin, MALLOC_NOTE
     );
+
+    type LFBST = binary_search_tree::LockFreeBST;
+    type ART = art::DefaultArt;
+    type BPTree = bptree::BpTree<String, String>;
+    type AVL = avl::ConcurrentAVLTree<usize, usize>;
+
     multithread_run(
         args.num_threads,
         args.size,
         args.pin,
         args.run_name,
         args.run_profiler,
-        Testcases::<binary_search_tree::LockFreeBST>::find("simple"),
+        TestcasesUsize::<AVL>::find("simple"),
     );
 }
+

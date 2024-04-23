@@ -7,7 +7,7 @@ use std::{
     time::Duration,
 };
 
-use data_structures::interfaces::{KeyType, Tree};
+use data_structures::interfaces::{GetType, KeyType, Tree};
 
 pub trait TestTree<T: KeyType> = Tree<T, T> + Sized;
 
@@ -111,15 +111,17 @@ impl<D, T: TestTree<D>> TestClient<D, T> for MultiThreadClient<D, T> {
 
     #[inline]
     fn get_check(&self, key: D, value: D) {
-        match self.get_tree().get(key) {
-            Some(v) => assert_eq!(v, &value),
-            None => panic!("Key not found"),
-        }
+        match T::GET_TYPE {
+            GetType::GetVal => assert_eq!(self.get_tree().get_val(key).expect("key not found"), value),
+            GetType::GetRef => assert_eq!(self.get_tree().get(key).expect("key not found"), &value)
+        };
     }
 
     fn get_check_absent(&self, key: D) {
-        let v = self.get_tree().get(key);
-        assert!(v.is_none());
+        match T::GET_TYPE {
+            GetType::GetVal => assert!(self.get_tree().get_val(key).is_none()),
+            GetType::GetRef => assert!(self.get_tree().get(key).is_none())
+        };
     }
 
     fn new() -> Self {

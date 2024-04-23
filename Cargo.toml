@@ -1,5 +1,6 @@
 [workspace]
-members = ["benchmarks", "benchrunner", "data_structures", "hoard-allocator"]
+default-members = ["benchmarks", "benchrunner", "data_structures", "hoard-allocator"]
+members = ["benchmarks", "benchrunner", "data_structures", "hoard-allocator", "ycsb-rs"]
 resolver = "2"
 
 [workspace.package]
