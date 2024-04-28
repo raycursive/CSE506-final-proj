@@ -11,11 +11,10 @@ use std::{
 use crate::{
     fix_sized_key::{FixSizedKey, FixSizedKeyParams},
     interfaces::{KeyType, Tree, ValueType},
-    quick_istr::QuickIStr,
 };
 
 pub trait TreeParams: FixSizedKeyParams {
-    type ValueType: Debug + Display + PartialEq + for<'a> From<QuickIStr<'a>>;
+    type ValueType: Debug + Display + PartialEq;
     type IKeyType: Debug
         + Clone
         + Display
@@ -23,9 +22,7 @@ pub trait TreeParams: FixSizedKeyParams {
         + Into<String>
         + From<String>
         + for<'a> From<&'a str>
-        + From<&'static str>
-        + Into<String>
-        + for<'a> From<QuickIStr<'a>>;
+        + From<&'static str>;
 }
 
 pub trait UnsafeGet<T> {

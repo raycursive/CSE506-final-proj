@@ -2,7 +2,7 @@
 
 use crate::{testcases::Testcases, testrunner::multithread_run};
 use clap::Parser;
-use data_structures::binary_search_tree;
+use data_structures::{binary_search_tree, interfaces::Tree};
 
 mod testcases;
 mod testclient;
@@ -38,6 +38,12 @@ static MALLOC_NOTE: &str = if cfg!(feature = "jemalloc") {
 
 #[derive(Parser)]
 struct Args {
+    #[arg(long)]
+    tree: String,
+
+    #[arg(long)]
+    testcase: String,
+
     #[arg(short = 'p', long, default_value_t = false)]
     pin: bool,
 
@@ -54,18 +60,30 @@ struct Args {
     run_profiler: bool,
 }
 
-fn main() {
-    let args = Args::parse();
-    println!(
-        "Benchmark: test run {} threads, size: {}, pin_to_core?: {}, memory allocator: {}",
-        args.num_threads, args.size, args.pin, MALLOC_NOTE
-    );
+fn run<T: Tree<String, String> + 'static>(args: Args) {
     multithread_run(
         args.num_threads,
         args.size,
         args.pin,
         args.run_name,
         args.run_profiler,
-        Testcases::<binary_search_tree::LockFreeBST>::find("simple"),
+        Testcases::<T>::find(&args.testcase),
     );
+}
+
+fn main() {
+    let args = Args::parse();
+    println!(
+        "Benchmark: test run {} threads, size: {}, pin_to_core?: {}, memory allocator: {}",
+        args.num_threads, args.size, args.pin, MALLOC_NOTE
+    );
+    match args.tree.as_str() {
+        "bst" => {
+            run::<binary_search_tree::LockFreeBST>(args);
+        }
+        "skiplist" => {
+            run::<data_structures::skiplist::SkipMapWrapper<String, String>>(args);
+        }
+        _ => panic!("unknown tree: {}", args.tree),
+    }
 }

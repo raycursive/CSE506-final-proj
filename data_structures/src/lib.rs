@@ -4,5 +4,4 @@
 pub mod binary_search_tree;
 mod fix_sized_key;
 pub mod interfaces;
-pub mod quick_istr;
 pub mod skiplist;
