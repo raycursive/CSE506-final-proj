@@ -5,3 +5,6 @@ pub mod binary_search_tree;
 mod fix_sized_key;
 pub mod interfaces;
 pub mod skiplist;
+pub mod art;
+pub mod bptree;
+pub mod avl;

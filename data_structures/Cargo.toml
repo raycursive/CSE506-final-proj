@@ -8,3 +8,6 @@ edition.workspace = true
 [dependencies]
 crossbeam = { version = "0.8.4", features = ["crossbeam-epoch", "crossbeam-queue", "crossbeam-deque", "crossbeam-channel", "nightly"] }
 crossbeam-skiplist = "0.1.3"
+congee = "0.2.18"
+bplustree = "0.1.0"
+cds = { git="https://github.com/codingskynet/concurrent-data-structure.git", branch = "main" }

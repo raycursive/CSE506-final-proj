@@ -10,12 +10,14 @@ mod testrunner;
 
 #[cfg(feature = "jemalloc")]
 use tikv_jemallocator::Jemalloc;
+
 #[cfg(feature = "jemalloc")]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
 
 #[cfg(feature = "tcmalloc")]
 use tcmalloc::TCMalloc;
+
 #[cfg(feature = "tcmalloc")]
 #[global_allocator]
 static GLOBAL: TCMalloc = TCMalloc;
