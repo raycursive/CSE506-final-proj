@@ -8,6 +8,7 @@ use std::{
 };
 
 use data_structures::interfaces::{GetType, KeyType, Tree};
+use crate::MALLOC_NOTE;
 
 pub trait TestTree<T: KeyType> = Tree<T, T> + Sized;
 
@@ -170,8 +171,8 @@ impl<D, T: TestTree<D>> TestClient<D, T> for MultiThreadClient<D, T> {
             let total_throughput = total_num as f64 / max_time_cost.as_secs_f64();
             let avg_throughput = total_num as f64 / total_cost.as_secs_f64();
             println!(
-                "metric: {}, #threads: {}, total throughput: {}, avg throughput: {}",
-                metric, num_thread, total_throughput, avg_throughput,
+                "metric: {}, malloc: {}, #threads: {}, total_throughput: {}, avg_throughput: {}",
+                metric, MALLOC_NOTE, num_thread, total_throughput, avg_throughput,
             );
         }
         stat_map.clear();
