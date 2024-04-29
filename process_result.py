@@ -3,7 +3,7 @@ import os
 from collections import defaultdict
 
 # Index of values in the metrics result line
-MALLOC_IND, THREADS_IND, AVG_THROUGHPUT_IND = 1, 2, -1
+METRIC_IND, MALLOC_IND, THREADS_IND, AVG_THROUGHPUT_IND = 0, 1, 2, -1
 
 
 def get_value(inp):
@@ -26,6 +26,11 @@ def compute_avg_per_thread_perf(input_file_path, result_dir):
                 continue
 
             tokens = line.split(',')
+            metric_name = get_value(tokens[METRIC_IND])
+
+            if not metric_name.startswith('put'):
+                continue
+
             malloc_name = get_value(tokens[MALLOC_IND])
             thread_count = int(get_value(tokens[THREADS_IND]))
             avg_throughput = float(get_value(tokens[AVG_THROUGHPUT_IND]))
@@ -77,7 +82,6 @@ def parse_args():
     return parser.parse_args()
 
 
-# python3 -m analyse_results <input_file_path> <output_dir>
 if __name__ == "__main__":
     args = parse_args()
     print("Processing result file:", args.input_file_path)
