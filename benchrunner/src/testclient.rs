@@ -112,15 +112,17 @@ impl<D, T: TestTree<D>> TestClient<D, T> for MultiThreadClient<D, T> {
     #[inline]
     fn get_check(&self, key: D, value: D) {
         match T::GET_TYPE {
-            GetType::GetVal => assert_eq!(self.get_tree().get_val(key).expect("key not found"), value),
-            GetType::GetRef => assert_eq!(self.get_tree().get(key).expect("key not found"), &value)
+            GetType::GetVal => {
+                assert_eq!(self.get_tree().get_val(key).expect("key not found"), value)
+            }
+            GetType::GetRef => assert_eq!(self.get_tree().get(key).expect("key not found"), &value),
         };
     }
 
     fn get_check_absent(&self, key: D) {
         match T::GET_TYPE {
             GetType::GetVal => assert!(self.get_tree().get_val(key).is_none()),
-            GetType::GetRef => assert!(self.get_tree().get(key).is_none())
+            GetType::GetRef => assert!(self.get_tree().get(key).is_none()),
         };
     }
 

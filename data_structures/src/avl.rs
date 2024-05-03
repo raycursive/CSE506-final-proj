@@ -1,6 +1,6 @@
+use crate::interfaces::{GetType, KeyType, Tree, ValueType};
 use cds::avltree::RwLockAVLTree;
-use cds::map::{ConcurrentMap};
-use crate::interfaces::{GetType, Tree, KeyType, ValueType};
+use cds::map::ConcurrentMap;
 
 #[allow(invalid_reference_casting)]
 impl<K: KeyType + Default, V: ValueType + Default> Tree<K, V> for RwLockAVLTree<K, V> {

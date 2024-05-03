@@ -2,10 +2,12 @@ use congee::Art;
 
 use crate::interfaces::{GetType, KeyType, Tree, ValueType};
 
-
-impl<K: KeyType, V: ValueType> Tree<K, V> for Art<K, V> where K: Clone + From<usize>,
-                                                              V: Clone + From<usize>,
-                                                              usize: From<V> + From<K> {
+impl<K: KeyType, V: ValueType> Tree<K, V> for Art<K, V>
+where
+    K: Clone + From<usize>,
+    V: Clone + From<usize>,
+    usize: From<V> + From<K>,
+{
     const GET_TYPE: crate::interfaces::GetType = GetType::GetVal;
 
     fn put(&self, key: K, value: V) {
@@ -20,6 +22,5 @@ impl<K: KeyType, V: ValueType> Tree<K, V> for Art<K, V> where K: Clone + From<us
         Art::default()
     }
 }
-
 
 pub type DefaultArt = Art<usize, usize>;
