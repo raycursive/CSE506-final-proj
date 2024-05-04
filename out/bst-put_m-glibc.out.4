@@ -1,0 +1,28 @@
+Benchmark: test run 1 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 1, total throughput: 809937.7720128322, avg throughput: 809937.7720128322
+5.41,0.81,99%,771072,192382,2
+
+Benchmark: test run 2 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 2, total throughput: 1605263.7523070066, avg throughput: 812179.6546691539
+5.49,0.78,197%,771072,192392,13
+
+Benchmark: test run 4 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 4, total throughput: 3209325.399974229, avg throughput: 816778.516240448
+5.48,0.80,388%,769024,192404,35
+
+Benchmark: test run 8 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 8, total throughput: 5773444.991035855, avg throughput: 759218.523558093
+5.72,1.26,745%,764928,192448,105
+
+Benchmark: test run 16 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 16, total throughput: 9708427.439466707, avg throughput: 619827.7715413847
+6.52,1.77,1430%,756736,192516,259
+
+Benchmark: test run 32 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 32, total throughput: 9740586.024591342, avg throughput: 308020.63744776294
+6.55,10.00,2816%,756736,192690,3496
+
+Benchmark: test run 64 threads, size: 5000000, pin_to_core?: true, memory allocator: default (glibc) malloc
+metric: put_32, #threads: 64, total throughput: 9597216.936075132, avg throughput: 156812.9547194298
+7.28,25.30,5273%,723968,193001,16851
+

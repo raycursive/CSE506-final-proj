@@ -16,7 +16,7 @@ build:
 
 test:
 	@echo "Warmup..."
-	@for i in {1..5}; do bins/benchrunner-glibc ${ARGS} > /dev/null; done
+	@for i in {1..5}; do bins/benchrunner-tcmalloc ${ARGS} > /dev/null; done
 
 	@echo "GLIBC"
 	bins/benchrunner-glibc ${ARGS}
@@ -39,15 +39,15 @@ test-timev:
 	@for i in {1..5}; do bins/benchrunner-glibc ${ARGS} > /dev/null; done
 
 	@echo "GLIBC"
-	/usr/bin/time -v bins/benchrunner-glibc ${ARGS}
+	/usr/bin/time -f %U,%S,%P,%M,%R,%w  bins/benchrunner-glibc ${ARGS}
 	@echo ""
 
 	@echo "Jemalloc"
-	/usr/bin/time -v bins/benchrunner-jemalloc ${ARGS}
+	/usr/bin/time -f %U,%S,%P,%M,%R,%w bins/benchrunner-jemalloc ${ARGS}
 	@echo ""
 
 	@echo "TCmalloc"
-	/usr/bin/time -v bins/benchrunner-tcmalloc ${ARGS}
+	/usr/bin/time -f %U,%S,%P,%M,%R,%w bins/benchrunner-tcmalloc ${ARGS}
 	@echo ""
 
 #@echo "Hoard"
