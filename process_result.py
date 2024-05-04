@@ -101,8 +101,8 @@ def compute_avg_per_thread_perf(input_file_path, data_structure, result_dir):
         'x_label': 'Number of threads',
         'y_label': 'puts/sec in thousands',
         'title': f'{data_structure} puts performance: Average throughput per thread',
-        'y_lim_min': min(0, measurement_transform_single(min_v) - 500),
-        'y_lim_max': measurement_transform_single(max_v) + 1000,
+        'y_lim_min': max(0, measurement_transform_single(min_v) - 500),
+        'y_lim_max': measurement_transform_single(max_v) + 500,
         'output_file_name': get_output_file_path(input_file_path, result_dir, 'png')
     }
 
