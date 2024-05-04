@@ -15,6 +15,9 @@ use tikv_jemallocator::Jemalloc;
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
 
+use data_structures::art::DefaultArt;
+use data_structures::avl::ConcurrentAVLTree;
+use data_structures::bptree::BpTree;
 #[cfg(feature = "tcmalloc")]
 use tcmalloc::TCMalloc;
 
@@ -22,8 +25,10 @@ use tcmalloc::TCMalloc;
 #[global_allocator]
 static GLOBAL: TCMalloc = TCMalloc;
 
+use crate::testcases::TestcasesUsize;
 #[cfg(feature = "hoard")]
 use hoard_allocator::Hoard;
+
 #[cfg(feature = "hoard")]
 #[global_allocator]
 static GLOBAL: Hoard = Hoard;
@@ -73,6 +78,17 @@ fn run<T: Tree<String, String> + 'static>(args: Args) {
     );
 }
 
+fn run_usize<T: Tree<usize, usize> + 'static>(args: Args) {
+    multithread_run(
+        args.num_threads,
+        args.size,
+        args.pin,
+        args.run_name,
+        args.run_profiler,
+        TestcasesUsize::<T>::find(&args.testcase),
+    );
+}
+
 fn main() {
     let args = Args::parse();
     println!(
@@ -85,6 +101,15 @@ fn main() {
         }
         "skiplist" => {
             run::<data_structures::skiplist::SkipMapWrapper<String, String>>(args);
+        }
+        "bptree" => {
+            run::<BpTree<String, String>>(args);
+        }
+        "avltree" => {
+            run_usize::<ConcurrentAVLTree<usize, usize>>(args);
+        }
+        "art" => {
+            run_usize::<DefaultArt>(args);
         }
         _ => panic!("unknown tree: {}", args.tree),
     }

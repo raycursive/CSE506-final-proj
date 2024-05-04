@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::marker::PhantomData;
 use std::time::Instant;
 
@@ -6,7 +7,6 @@ use rand::rngs::StdRng;
 use rand::{Rng, SeedableRng};
 
 use crate::testclient::{TestClient, TestTree};
-use std::collections::HashSet;
 
 pub struct Testcases<T: TestTree<String>> {
     _phantom: PhantomData<T>,
