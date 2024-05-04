@@ -1,0 +1,28 @@
+Benchmark: test run 1 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 1, total throughput: 295575.76186447946, avg throughput: 295575.76186447946
+15.59,1.52,99%,3080192,790028,2
+
+Benchmark: test run 2 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 2, total throughput: 591826.2843461294, avg throughput: 296193.0543325647
+15.49,1.61,197%,3080192,790032,7
+
+Benchmark: test run 4 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 4, total throughput: 1168725.158416593, avg throughput: 292850.0229095841
+15.63,1.69,385%,3080192,790285,43
+
+Benchmark: test run 8 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 8, total throughput: 2253679.7228369866, avg throughput: 282337.68876040727
+16.02,1.96,732%,3079168,790820,165
+
+Benchmark: test run 16 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 16, total throughput: 3863233.4269851167, avg throughput: 242208.06534337398
+18.75,2.19,1362%,3069952,789335,517
+
+Benchmark: test run 32 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 32, total throughput: 6583700.939103316, avg throughput: 206926.07764653408
+21.85,2.65,2409%,3070976,791181,1382
+
+Benchmark: test run 64 threads, size: 5000000, pin_to_core?: true, memory allocator: jemalloc
+metric: put_512, #threads: 64, total throughput: 7864390.662725358, avg throughput: 125880.45348557839
+34.28,6.10,4631%,3056640,792096,15422
+
